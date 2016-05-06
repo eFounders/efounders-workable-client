@@ -24,31 +24,13 @@ var _assign = require('babel-runtime/core-js/object/assign');
 
 var _assign2 = _interopRequireDefault(_assign);
 
+require('isomorphic-fetch');
+
 var _Accounts = require('./Accounts');
 
 var _Accounts2 = _interopRequireDefault(_Accounts);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* Workable API
-
-workable.accounts().list()
-workable.accounts(subdomain).info()
-workable.accounts(subdomain).members().list()
-workable.accounts(subdomain).recruiters().list()
-workable.accounts(subdomain).stages().list()
-workable.accounts(subdomain).jobs().list()
-workable.accounts(subdomain).jobs().listAll()
-workable.accounts(subdomain).jobs(shortcode).info()
-workable.accounts(subdomain).jobs(shortcode).questions().list()
-workable.accounts(subdomain).jobs(shortcode).members().list()
-workable.accounts(subdomain).jobs(shortcode).recruiters().list()
-workable.accounts(subdomain).jobs(shortcode).candidates().list()
-workable.accounts(subdomain).jobs(shortcode).candidates().listAll()
-workable.accounts(subdomain).jobs(shortcode).candidates(id).info()
-workable.accounts(subdomain).jobs(shortcode).candidates().create()
-
-*/
 
 var Workable = {
   new: function _new(accessToken) {
