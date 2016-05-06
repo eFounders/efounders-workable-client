@@ -1,6 +1,6 @@
 {
   "name": "workable-client",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Workable API node client",
   "repository": {
     "type": "git",
