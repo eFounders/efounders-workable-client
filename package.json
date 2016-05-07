@@ -1,11 +1,11 @@
 {
-  "name": "@efounders/workable-client",
-  "version": "0.0.2",
+  "name": "@efounders/workable",
+  "version": "0.0.1",
   "description": "Workable API node client",
   "main": "dist/index.js",
   "scripts": {
     "eslint": "node ./node_modules/eslint/bin/eslint.js src; exit 0",
-    "compile": "./node_modules/.bin/babel --plugins \"transform-runtime\" --presets es2015,stage-0 -d dist src",
+    "compile": "./node_modules/.bin/babel --plugins transform-runtime --presets es2015,stage-0 -d dist src",
     "prepublish": "npm run compile"
   },
   "keywords": [
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.8.0",
-    "isomorphic-fetch": "^2.2.1"
+    "node-fetch": "^1.5.2"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",

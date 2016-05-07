@@ -31,14 +31,19 @@ var _Jobs2 = _interopRequireDefault(_Jobs);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Accounts = {
-  new: function _new(subdomain, workable) {
-    return (0, _assign2.default)((0, _create2.default)(this), { subdomain: subdomain, workable: workable });
+  new: function _new(params) {
+    return (0, _assign2.default)((0, _create2.default)(this), params);
   },
   info: function info() {
-    return this.workable.get({ endpoint: '/' + this.subdomain });
+    var workable = this.workable;
+    var subdomain = this.subdomain;
+
+    return workable.get({ endpoint: '/' + subdomain });
   },
   list: function list() {
-    return this.workable.get({ endpoint: '/' });
+    var workable = this.workable;
+
+    return workable.get({ endpoint: '/' });
   },
   members: function members() {
     return _Members2.default.new(this.subdomain, null, this.workable);

@@ -1,18 +1,16 @@
-import 'isomorphic-fetch';
+import fetch from 'node-fetch';
 import Accounts from './Accounts';
 
 const Workable = {
-  new(accessToken) {
-    return Object.assign(Object.create(this), { accessToken });
+  new(params) {
+    return Object.assign(Object.create(this), params);
   },
-  async fetch({ endpoint, url, body, headers = {}, method }) {
+  async fetch({ endpoint, url, body, method, headers = {} }) {
     try {
       const fetchedUrl = endpoint ? `${this.baseUrl}${endpoint}` : url;
       const response = await fetch(fetchedUrl, {
         method,
-        headers: Object.assign({
-          Authorization: `Bearer ${this.accessToken}`,
-        }, headers),
+        headers: Object.assign({ Authorization: `Bearer ${this.accessToken}` }, headers),
         body: body && JSON.stringify(body),
       });
       return response.json();
@@ -34,7 +32,7 @@ const Workable = {
     });
   },
   accounts(subdomain) {
-    return Accounts.new(subdomain, this);
+    return Accounts.new({ workable: this, subdomain });
   },
   //
   baseUrl: 'https://www.workable.com/spi/v3/accounts',

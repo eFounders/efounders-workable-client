@@ -24,7 +24,9 @@ var _assign = require('babel-runtime/core-js/object/assign');
 
 var _assign2 = _interopRequireDefault(_assign);
 
-require('isomorphic-fetch');
+var _nodeFetch = require('node-fetch');
+
+var _nodeFetch2 = _interopRequireDefault(_nodeFetch);
 
 var _Accounts = require('./Accounts');
 
@@ -33,28 +35,18 @@ var _Accounts2 = _interopRequireDefault(_Accounts);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Workable = {
-  new: function _new(accessToken) {
-    return (0, _assign2.default)((0, _create2.default)(this), { accessToken: accessToken });
+  new: function _new(params) {
+    return (0, _assign2.default)((0, _create2.default)(this), params);
   },
-  fetch: function (_fetch) {
-    function fetch(_x) {
-      return _fetch.apply(this, arguments);
-    }
-
-    fetch.toString = function () {
-      return _fetch.toString();
-    };
-
-    return fetch;
-  }(function (_ref) {
+  fetch: function fetch(_ref) {
     var _this = this;
 
     var endpoint = _ref.endpoint;
     var url = _ref.url;
     var body = _ref.body;
+    var method = _ref.method;
     var _ref$headers = _ref.headers;
     var headers = _ref$headers === undefined ? {} : _ref$headers;
-    var method = _ref.method;
     return (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
       var fetchedUrl, response;
       return _regenerator2.default.wrap(function _callee$(_context) {
@@ -64,11 +56,9 @@ var Workable = {
               _context.prev = 0;
               fetchedUrl = endpoint ? '' + _this.baseUrl + endpoint : url;
               _context.next = 4;
-              return fetch(fetchedUrl, {
+              return (0, _nodeFetch2.default)(fetchedUrl, {
                 method: method,
-                headers: (0, _assign2.default)({
-                  Authorization: 'Bearer ' + _this.accessToken
-                }, headers),
+                headers: (0, _assign2.default)({ Authorization: 'Bearer ' + _this.accessToken }, headers),
                 body: body && (0, _stringify2.default)(body)
               });
 
@@ -90,7 +80,7 @@ var Workable = {
         }
       }, _callee, _this, [[0, 8]]);
     }))();
-  }),
+  },
   get: function get(_ref2) {
     var endpoint = _ref2.endpoint;
     var url = _ref2.url;
@@ -111,7 +101,7 @@ var Workable = {
     });
   },
   accounts: function accounts(subdomain) {
-    return _Accounts2.default.new(subdomain, this);
+    return _Accounts2.default.new({ workable: this, subdomain: subdomain });
   },
 
   //
