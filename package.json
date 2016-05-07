@@ -2,16 +2,20 @@
   "name": "workable-client",
   "version": "0.0.1",
   "description": "Workable API node client",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/eFounders/efounders-workable-client.git"
-  },
-  "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
     "eslint": "node ./node_modules/eslint/bin/eslint.js src; exit 0",
     "compile": "./node_modules/.bin/babel --plugins \"transform-runtime\" --presets es2015,stage-0 -d dist src",
     "prepublish": "npm run compile"
+  },
+  "keywords": [
+    "workable"
+  ],
+  "author": "eFounders",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eFounders/efounders-workable-client.git"
   },
   "dependencies": {
     "babel-polyfill": "^6.8.0",
@@ -26,8 +30,8 @@
     "babel-preset-stage-0": "^6.5.0",
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^8.0.0",
-    "eslint-plugin-import": "^1.6.1",
-    "eslint-plugin-jsx-a11y": "^1.0.4",
+    "eslint-plugin-import": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.0.1"
   }
 }
