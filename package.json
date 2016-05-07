@@ -1,6 +1,6 @@
 {
   "name": "@efounders/workable-client",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Workable API node client",
   "main": "dist/index.js",
   "scripts": {
