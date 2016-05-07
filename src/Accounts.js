@@ -4,16 +4,14 @@ import Stages from './Stages';
 import Jobs from './Jobs';
 
 const Accounts = {
-  new(params) {
-    return Object.assign(Object.create(this), params);
+  new(subdomain, workable) {
+    return Object.assign(Object.create(this), { subdomain, workable });
   },
   info() {
-    const { workable, subdomain } = this;
-    return workable.get({ endpoint: `/${subdomain}` });
+    return this.workable.get({ endpoint: `/${this.subdomain}` });
   },
   list() {
-    const { workable } = this;
-    return workable.get({ endpoint: '/' });
+    return this.workable.get({ endpoint: '/' });
   },
   members() {
     return Members.new(this.subdomain, null, this.workable);

@@ -35,8 +35,8 @@ var _Accounts2 = _interopRequireDefault(_Accounts);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Workable = {
-  new: function _new(params) {
-    return (0, _assign2.default)((0, _create2.default)(this), params);
+  new: function _new(accessToken) {
+    return (0, _assign2.default)((0, _create2.default)(this), { accessToken: accessToken });
   },
   fetch: function fetch(_ref) {
     var _this = this;
@@ -101,7 +101,7 @@ var Workable = {
     });
   },
   accounts: function accounts(subdomain) {
-    return _Accounts2.default.new({ workable: this, subdomain: subdomain });
+    return _Accounts2.default.new(subdomain, this);
   },
 
   //
