@@ -15,11 +15,16 @@ var _assign2 = _interopRequireDefault(_assign);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Questions = {
-  new: function _new(subdomain, shortcode, workable) {
-    return (0, _assign2.default)((0, _create2.default)(this), { subdomain: subdomain, shortcode: shortcode, workable: workable });
+  new: function _new(params) {
+    return (0, _assign2.default)((0, _create2.default)(this), params);
   },
   list: function list() {
-    return this.workable.get({ endpoint: "/" + this.subdomain + "/jobs/" + this.shortcode + "/questions" });
+    var client = this.client;
+    var subdomain = this.subdomain;
+    var shortcode = this.shortcode;
+
+    var endpoint = "/" + subdomain + "/jobs/" + shortcode + "/questions";
+    return client.get({ endpoint: endpoint });
   }
 };
 

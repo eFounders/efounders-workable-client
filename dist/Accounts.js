@@ -31,26 +31,45 @@ var _Jobs2 = _interopRequireDefault(_Jobs);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Accounts = {
-  new: function _new(subdomain, workable) {
-    return (0, _assign2.default)((0, _create2.default)(this), { subdomain: subdomain, workable: workable });
+  new: function _new(params) {
+    return (0, _assign2.default)((0, _create2.default)(this), params);
   },
   info: function info() {
-    return this.workable.get({ endpoint: '/' + this.subdomain });
+    var client = this.client;
+    var subdomain = this.subdomain;
+
+    var endpoint = '/' + subdomain;
+    return client.get({ endpoint: endpoint });
   },
   list: function list() {
-    return this.workable.get({ endpoint: '/' });
+    var client = this.client;
+
+    var endpoint = '/';
+    return client.get({ endpoint: endpoint });
   },
   members: function members() {
-    return _Members2.default.new(this.subdomain, null, this.workable);
+    var client = this.client;
+    var subdomain = this.subdomain;
+
+    return _Members2.default.new({ client: client, subdomain: subdomain });
   },
   recruiters: function recruiters() {
-    return _Recruiters2.default.new(this.subdomain, null, this.workable);
+    var client = this.client;
+    var subdomain = this.subdomain;
+
+    return _Recruiters2.default.new({ client: client, subdomain: subdomain });
   },
   stages: function stages() {
-    return _Stages2.default.new(this.subdomain, this.workable);
+    var client = this.client;
+    var subdomain = this.subdomain;
+
+    return _Stages2.default.new({ client: client, subdomain: subdomain });
   },
   jobs: function jobs(shortcode) {
-    return _Jobs2.default.new(this.subdomain, shortcode, this.workable);
+    var client = this.client;
+    var subdomain = this.subdomain;
+
+    return _Jobs2.default.new({ client: client, subdomain: subdomain, shortcode: shortcode });
   }
 };
 

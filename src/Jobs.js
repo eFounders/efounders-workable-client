@@ -5,26 +5,30 @@ import Recruiters from './Recruiters';
 import Candidates from './Candidates';
 
 const Jobs = {
-  new(subdomain, shortcode, workable) {
-    return Object.assign(Object.create(this), { subdomain, shortcode, workable });
+  new(params) {
+    return Object.assign(Object.create(this), params);
   },
   info() {
-    return this.workable.get({ endpoint: `/${this.subdomain}/jobs/${this.shortcode}` });
+    const { client, subdomain, shortcode } = this;
+    const endpoint = `/${subdomain}/jobs/${shortcode}`;
+    return client.get({ endpoint });
   },
   list(options = {}) {
+    const { client, subdomain } = this;
     const optionsQueryString = querystring.stringify(options);
     const queryString = optionsQueryString.length ? `?${optionsQueryString}` : '';
-    const endpoint = `/${this.subdomain}/jobs${queryString}`;
-    return this.workable.get({ endpoint });
+    const endpoint = `/${subdomain}/jobs${queryString}`;
+    return client.get({ endpoint });
   },
   async listAll(options = {}) {
     try {
+      const { client } = this;
       Object.assign(options, { limit: 100 });
       const { jobs: firstJobs, paging: firstPaging } = await this.list(options);
       let result = firstJobs;
       let nextUrl = firstPaging && firstPaging.next;
       while (nextUrl) {
-        const { jobs, paging } = await this.workable.get({ url: nextUrl });
+        const { jobs, paging } = await client.get({ url: nextUrl });
         result = result.concat(jobs);
         nextUrl = paging && paging.next;
       }
@@ -35,16 +39,20 @@ const Jobs = {
     }
   },
   questions() {
-    return Questions.new(this.subdomain, this.shortcode, this.workable);
+    const { client, subdomain, shortcode } = this;
+    return Questions.new({ client, subdomain, shortcode });
   },
   members() {
-    return Members.new(this.subdomain, this.shortcode, this.workable);
+    const { client, subdomain, shortcode } = this;
+    return Members.new({ client, subdomain, shortcode });
   },
   recruiters() {
-    return Recruiters.new(this.subdomain, this.shortcode, this.workable);
+    const { client, subdomain, shortcode } = this;
+    return Recruiters.new({ client, subdomain, shortcode });
   },
   candidates(id) {
-    return Candidates.new(this.subdomain, this.shortcode, id, this.workable);
+    const { client, subdomain, shortcode } = this;
+    return Candidates.new({ client, subdomain, shortcode, id });
   },
 };
 

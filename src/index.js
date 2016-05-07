@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import Accounts from './Accounts';
 
 const Workable = {
-  new(accessToken) {
+  client(accessToken) {
     return Object.assign(Object.create(this), { accessToken });
   },
   async fetch({ endpoint, url, body, method, headers = {} }) {
@@ -32,7 +32,7 @@ const Workable = {
     });
   },
   accounts(subdomain) {
-    return Accounts.new(subdomain, this);
+    return Accounts.new({ client: this, subdomain });
   },
   //
   baseUrl: 'https://www.workable.com/spi/v3/accounts',

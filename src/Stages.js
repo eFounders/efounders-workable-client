@@ -1,9 +1,11 @@
 const Stages = {
-  new(subdomain, workable) {
-    return Object.assign(Object.create(this), { subdomain, workable });
+  new(params) {
+    return Object.assign(Object.create(this), params);
   },
   list() {
-    return this.workable.get({ endpoint: `/${this.subdomain}/stages` });
+    const { client, subdomain } = this;
+    const endpoint = `/${subdomain}/stages`;
+    return client.get({ endpoint });
   },
 };
 

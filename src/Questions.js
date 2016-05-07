@@ -1,9 +1,11 @@
 const Questions = {
-  new(subdomain, shortcode, workable) {
-    return Object.assign(Object.create(this), { subdomain, shortcode, workable });
+  new(params) {
+    return Object.assign(Object.create(this), params);
   },
   list() {
-    return this.workable.get({ endpoint: `/${this.subdomain}/jobs/${this.shortcode}/questions` });
+    const { client, subdomain, shortcode } = this;
+    const endpoint = `/${subdomain}/jobs/${shortcode}/questions`;
+    return client.get({ endpoint });
   },
 };
 

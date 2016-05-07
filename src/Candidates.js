@@ -1,27 +1,30 @@
 import querystring from 'querystring';
 
 const Candidates = {
-  new(subdomain, shortcode, id, workable) {
-    return Object.assign(Object.create(this), { subdomain, shortcode, id, workable });
+  new(params) {
+    return Object.assign(Object.create(this), params);
   },
   info() {
-    const endpoint = `/${this.subdomain}/jobs/${this.shortcode}/candidates/${this.id}`;
-    return this.workable.get({ endpoint });
+    const { client, subdomain, shortcode, id } = this;
+    const endpoint = `/${subdomain}/jobs/${shortcode}/candidates/${id}`;
+    return client.get({ endpoint });
   },
   list(options = {}) {
+    const { client, subdomain, shortcode } = this;
     const optionsQueryString = querystring.stringify(options);
     const queryString = optionsQueryString.length ? `?${optionsQueryString}` : '';
-    const endpoint = `/${this.subdomain}/jobs/${this.shortcode}/candidates${queryString}`;
-    return this.workable.get({ endpoint });
+    const endpoint = `/${subdomain}/jobs/${shortcode}/candidates${queryString}`;
+    return client.get({ endpoint });
   },
   async listAll(options = {}) {
     try {
+      const { client } = this;
       Object.assign(options, { limit: 100 });
       const { candidates: firstCandidates, paging: firstPaging } = await this.list(options);
       let result = firstCandidates;
       let nextUrl = firstPaging && firstPaging.next;
       while (nextUrl) {
-        const { candidates, paging } = await this.workable.get({ url: nextUrl });
+        const { candidates, paging } = await client.get({ url: nextUrl });
         result = result.concat(candidates);
         nextUrl = paging && paging.next;
       }
@@ -32,10 +35,11 @@ const Candidates = {
     }
   },
   create(candidate, stage) {
+    const { client, subdomain, shortcode } = this;
     const stageQueryString = querystring.stringify({ stage });
     const queryString = stage ? `?${stageQueryString}` : '';
-    const endpoint = `/${this.subdomain}/jobs/${this.shortcode}/candidates${queryString}`;
-    return this.workable.post({ endpoint, body: candidate });
+    const endpoint = `/${subdomain}/jobs/${shortcode}/candidates${queryString}`;
+    return client.post({ endpoint, body: candidate });
   },
 };
 

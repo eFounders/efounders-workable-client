@@ -4,26 +4,34 @@ import Stages from './Stages';
 import Jobs from './Jobs';
 
 const Accounts = {
-  new(subdomain, workable) {
-    return Object.assign(Object.create(this), { subdomain, workable });
+  new(params) {
+    return Object.assign(Object.create(this), params);
   },
   info() {
-    return this.workable.get({ endpoint: `/${this.subdomain}` });
+    const { client, subdomain } = this;
+    const endpoint = `/${subdomain}`;
+    return client.get({ endpoint });
   },
   list() {
-    return this.workable.get({ endpoint: '/' });
+    const { client } = this;
+    const endpoint = '/';
+    return client.get({ endpoint });
   },
   members() {
-    return Members.new(this.subdomain, null, this.workable);
+    const { client, subdomain } = this;
+    return Members.new({ client, subdomain });
   },
   recruiters() {
-    return Recruiters.new(this.subdomain, null, this.workable);
+    const { client, subdomain } = this;
+    return Recruiters.new({ client, subdomain });
   },
   stages() {
-    return Stages.new(this.subdomain, this.workable);
+    const { client, subdomain } = this;
+    return Stages.new({ client, subdomain });
   },
   jobs(shortcode) {
-    return Jobs.new(this.subdomain, shortcode, this.workable);
+    const { client, subdomain } = this;
+    return Jobs.new({ client, subdomain, shortcode });
   },
 };
 

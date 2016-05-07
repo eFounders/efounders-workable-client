@@ -15,12 +15,17 @@ var _assign2 = _interopRequireDefault(_assign);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Recruiters = {
-  new: function _new(subdomain, shortcode, workable) {
-    return (0, _assign2.default)((0, _create2.default)(this), { subdomain: subdomain, shortcode: shortcode, workable: workable });
+  new: function _new(params) {
+    return (0, _assign2.default)((0, _create2.default)(this), params);
   },
   list: function list() {
-    var job = this.shortcode ? '/jobs/' + this.shortcode : '';
-    return this.workable.get({ endpoint: '/' + this.subdomain + job + '/recruiters' });
+    var client = this.client;
+    var subdomain = this.subdomain;
+    var shortcode = this.shortcode;
+
+    var job = shortcode ? '/jobs/' + shortcode : '';
+    var endpoint = '/' + subdomain + job + '/recruiters';
+    return client.get({ endpoint: endpoint });
   }
 };
 
