@@ -7,11 +7,12 @@ const Accounts = {
   new(params) {
     return Object.assign(Object.create(this), params);
   },
-  info() {
+  // endpoint exists but not listed in the official docs
+  /* info() {
     const { client, subdomain } = this;
     const endpoint = `/${subdomain}`;
     return client.get({ endpoint });
-  },
+  },*/
   list() {
     const { client } = this;
     const endpoint = '/';

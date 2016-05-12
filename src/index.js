@@ -6,18 +6,13 @@ const Workable = {
     return Object.assign(Object.create(this), { accessToken });
   },
   async fetch({ endpoint, url, body, method, headers = {} }) {
-    try {
-      const fetchedUrl = endpoint ? `${this.baseUrl}${endpoint}` : url;
-      const response = await fetch(fetchedUrl, {
-        method,
-        headers: Object.assign({ Authorization: `Bearer ${this.accessToken}` }, headers),
-        body: body && JSON.stringify(body),
-      });
-      return response.json();
-    } catch (exception) {
-      console.error('Workable.fetch', exception);
-      throw exception;
-    }
+    const fetchedUrl = endpoint ? `${this.baseUrl}${endpoint}` : url;
+    const response = await fetch(fetchedUrl, {
+      method,
+      headers: Object.assign({ Authorization: `Bearer ${this.accessToken}` }, headers),
+      body: body && JSON.stringify(body),
+    });
+    return response.json();
   },
   get({ endpoint, url }) {
     return this.fetch({ endpoint, url, method: 'GET' });

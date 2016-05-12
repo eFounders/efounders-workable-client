@@ -21,22 +21,17 @@ const Jobs = {
     return client.get({ endpoint });
   },
   async listAll(options = {}) {
-    try {
-      const { client } = this;
-      Object.assign(options, { limit: 100 });
-      const { jobs: firstJobs, paging: firstPaging } = await this.list(options);
-      let result = firstJobs;
-      let nextUrl = firstPaging && firstPaging.next;
-      while (nextUrl) {
-        const { jobs, paging } = await client.get({ url: nextUrl });
-        result = result.concat(jobs);
-        nextUrl = paging && paging.next;
-      }
-      return { jobs: result };
-    } catch (exception) {
-      console.error('Jobs.listAll', exception);
-      throw exception;
+    const { client } = this;
+    Object.assign(options, { limit: 100 });
+    const { jobs: firstJobs, paging: firstPaging } = await this.list(options);
+    let result = firstJobs;
+    let nextUrl = firstPaging && firstPaging.next;
+    while (nextUrl) {
+      const { jobs, paging } = await client.get({ url: nextUrl });
+      result = result.concat(jobs);
+      nextUrl = paging && paging.next;
     }
+    return { jobs: result };
   },
   questions() {
     const { client, subdomain, shortcode } = this;

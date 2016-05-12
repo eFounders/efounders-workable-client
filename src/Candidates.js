@@ -17,22 +17,17 @@ const Candidates = {
     return client.get({ endpoint });
   },
   async listAll(options = {}) {
-    try {
-      const { client } = this;
-      Object.assign(options, { limit: 100 });
-      const { candidates: firstCandidates, paging: firstPaging } = await this.list(options);
-      let result = firstCandidates;
-      let nextUrl = firstPaging && firstPaging.next;
-      while (nextUrl) {
-        const { candidates, paging } = await client.get({ url: nextUrl });
-        result = result.concat(candidates);
-        nextUrl = paging && paging.next;
-      }
-      return { candidates: result };
-    } catch (exception) {
-      console.error('Candidates.listAll', exception);
-      throw exception;
+    const { client } = this;
+    Object.assign(options, { limit: 100 });
+    const { candidates: firstCandidates, paging: firstPaging } = await this.list(options);
+    let result = firstCandidates;
+    let nextUrl = firstPaging && firstPaging.next;
+    while (nextUrl) {
+      const { candidates, paging } = await client.get({ url: nextUrl });
+      result = result.concat(candidates);
+      nextUrl = paging && paging.next;
     }
+    return { candidates: result };
   },
   create(candidate, stage) {
     const { client, subdomain, shortcode } = this;
