@@ -49,55 +49,55 @@ For paginated responses such as jobs listing or candidates listing, there's also
 
 `workable.accounts().list()`
 
-[Returns a collection of all the accounts you have access to.](https://workable.readme.io/docs/accounts)
+* [Returns a collection of all the accounts you have access to.](https://workable.readme.io/docs/accounts)
 
 `workable.accounts(subdomain).members().list()`
 
-[Returns a collection of your account members.](https://workable.readme.io/docs/members)
+* [Returns a collection of your account members.](https://workable.readme.io/docs/members)
 
 `workable.accounts(subdomain).recruiters().list()`
 
-[Returns a collection of your account external recruiters.](https://workable.readme.io/docs/recruiters)
+* [Returns a collection of your account external recruiters.](https://workable.readme.io/docs/recruiters)
 
 `workable.accounts(subdomain).stages().list()`
 
-[Returns a collection of your recruitment pipeline stages.](https://workable.readme.io/docs/stages)
+* [Returns a collection of your recruitment pipeline stages.](https://workable.readme.io/docs/stages)
 
 `workable.accounts(subdomain).jobs().list()`
 
 `workable.accounts(subdomain).jobs().listAll()`
 
-[Returns a collection of your account jobs](https://workable.readme.io/docs/jobs)
+* [Returns a collection of your account jobs](https://workable.readme.io/docs/jobs)
 
 `workable.accounts(subdomain).jobs(shortcode).info()`
 
-[Returns the full job JSON object.](https://workable.readme.io/docs/jobsshortcode)
+* [Returns the full job JSON object.](https://workable.readme.io/docs/jobsshortcode)
 
 `workable.accounts(subdomain).jobs(shortcode).questions().list()`
 
-[Returns a JSON array of the job's questions.](https://workable.readme.io/docs/job-questions)
+* [Returns a JSON array of the job's questions.](https://workable.readme.io/docs/job-questions)
 
 `workable.accounts(subdomain).jobs(shortcode).members().list()`
 
-[Returns an array with the job's members.](https://workable.readme.io/docs/jobs-members)
+* [Returns an array with the job's members.](https://workable.readme.io/docs/jobs-members)
 
 `workable.accounts(subdomain).jobs(shortcode).recruiters().list()`
 
-[returns a collection of the job's external recruiters.](https://workable.readme.io/docs/jobs-recruiters)
+* [returns a collection of the job's external recruiters.](https://workable.readme.io/docs/jobs-recruiters)
 
 `workable.accounts(subdomain).jobs(shortcode).candidates().list()`
 
 `workable.accounts(subdomain).jobs(shortcode).candidates().listAll()`
 
-[Returns a collection of the job's candidates.](https://workable.readme.io/docs/job-candidates-index)
+* [Returns a collection of the job's candidates.](https://workable.readme.io/docs/job-candidates-index)
 
 `workable.accounts(subdomain).jobs(shortcode).candidates(id).info()`
 
-[Returns the full job JSON object of a specific candidate.](https://workable.readme.io/docs/job-candidates-show)
+* [Returns the full job JSON object of a specific candidate.](https://workable.readme.io/docs/job-candidates-show)
 
 `workable.accounts(subdomain).jobs(shortcode).candidates().create()`
 
-[Creates a new candidate for the job.](https://workable.readme.io/docs/job-candidates-create)
+* [Creates a new candidate for the job.](https://workable.readme.io/docs/job-candidates-create)
 
 ## Copyright
 
