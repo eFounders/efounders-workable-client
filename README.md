@@ -14,8 +14,6 @@ npm install @efounders/workable-client --save
 
 ```javascript
 import Workable from '@efounders/workable-client';
-// not using ES2015 ?
-// const Workable = require('@efounders/workable-client').default;
 
 // provide your workable access token to instantiate a workable client
 const workable = Workable.client(process.env.WORKABLE_ACCESS_TOKEN);
@@ -30,6 +28,14 @@ workable.accounts().list().then(({ accounts }) => {
 });
 ```
 
+Not using ES2015?
+
+Import the module this way instead:
+
+```javascript
+var Workable = require('@efounders/workable-client').default;
+```
+
 ## Running the example
 
 ```bashp
@@ -42,7 +48,7 @@ WORKABLE_ACCESS_TOKEN=YOUR_TOKEN npm start
 ## Usage overview
 
 Every API endpoint maps to a method on the workable client.
-Each method returns a `Promise` that resolves to the JSON parsed from the response.
+Each method returns a `Promise` that resolves to the JSON parsed from the returned response.
 For paginated responses such as jobs listing or candidates listing, there's also an additional helper method to handle pagination and return all results in a single call.
 
 ## Methods list
