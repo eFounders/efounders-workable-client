@@ -7,12 +7,11 @@ const Workable = {
   },
   async fetch({ endpoint, url, body, method, headers = {} }) {
     const fetchedUrl = endpoint ? `${this.baseUrl}${endpoint}` : url;
-    const response = await fetch(fetchedUrl, {
+    return fetch(fetchedUrl, {
       method,
       headers: Object.assign({ Authorization: `Bearer ${this.accessToken}` }, headers),
       body: body && JSON.stringify(body),
-    });
-    return response.json();
+    }).then(response => response.json());
   },
   get({ endpoint, url }) {
     return this.fetch({ endpoint, url, method: 'GET' });

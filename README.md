@@ -6,7 +6,7 @@ This is a simple wrapper around the [Workable API v3](https://workable.readme.io
 
 ## Installation
 
-```bashp
+```shell
 npm install @efounders/workable-client --save
 ```
 
@@ -38,7 +38,7 @@ var Workable = require('@efounders/workable-client').default;
 
 ## Running the example
 
-```bashp
+```shell
 git clone https://github.com/eFounders/efounders-workable-client.git
 cd efounders-workable-client/example
 npm install
@@ -104,6 +104,10 @@ For paginated responses such as jobs listing or candidates listing, there's also
 `workable.accounts(subdomain).jobs(shortcode).candidates().create()`
 
 * [Creates a new candidate for the job.](https://workable.readme.io/docs/job-candidates-create)
+
+`workable.accounts(subdomain).jobs(shortcode).applicationForm().info()`
+
+* [Returns a JSON object with two arrays, one with the application form fields and one array with the job's questions.](https://workable.readme.io/docs/jobsshortcodeapplication_form)
 
 ## Copyright
 

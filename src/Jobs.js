@@ -3,6 +3,7 @@ import Questions from './Questions';
 import Members from './Members';
 import Recruiters from './Recruiters';
 import Candidates from './Candidates';
+import ApplicationForm from './ApplicationForm';
 
 const Jobs = {
   new(params) {
@@ -48,6 +49,10 @@ const Jobs = {
   candidates(id) {
     const { client, subdomain, shortcode } = this;
     return Candidates.new({ client, subdomain, shortcode, id });
+  },
+  applicationForm() {
+    const { client, subdomain, shortcode } = this;
+    return ApplicationForm.new({ client, subdomain, shortcode });
   },
 };
 
