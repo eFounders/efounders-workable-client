@@ -13,10 +13,10 @@ npm install @efounders/workable-client --save
 ## Quick start
 
 ```javascript
-import Workable from '@efounders/workable-client';
+const Workable = require('@efounders/workable-client');
 
 // provide your workable access token to instantiate a workable client
-const workable = Workable.client(process.env.WORKABLE_ACCESS_TOKEN);
+const workable = new Workable(process.env.WORKABLE_ACCESS_TOKEN);
 // lists all the accounts you have access to
 workable.accounts().list().then(({ accounts }) => {
   const [{ subdomain }] = accounts;
@@ -26,14 +26,6 @@ workable.accounts().list().then(({ accounts }) => {
     members.forEach((member) => console.log(member.name));
   });
 });
-```
-
-Not using ES2015?
-
-Import the module this way instead:
-
-```javascript
-var Workable = require('@efounders/workable-client').default;
 ```
 
 ## Running the example

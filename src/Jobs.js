@@ -1,59 +1,62 @@
-import querystring from 'querystring';
-import Questions from './Questions';
-import Members from './Members';
-import Recruiters from './Recruiters';
-import Candidates from './Candidates';
-import ApplicationForm from './ApplicationForm';
+const { stringify } = require('querystring');
 
-const Jobs = {
-  new(params) {
-    return Object.assign(Object.create(this), params);
-  },
+const Questions = require('./questions');
+const Members = require('./members');
+const Recruiters = require('./recruiters');
+const Candidates = require('./candidates');
+const ApplicationForm = require('./application-form');
+
+class Jobs {
+  constructor({ client, subdomain, shortcode }) {
+    this.client = client;
+    this.subdomain = subdomain;
+    this.shortcode = shortcode;
+  }
   info() {
     const { client, subdomain, shortcode } = this;
     const endpoint = `/${subdomain}/jobs/${shortcode}`;
     return client.get({ endpoint });
-  },
+  }
   list(options = {}) {
     const { client, subdomain } = this;
-    const optionsQueryString = querystring.stringify(options);
+    const optionsQueryString = stringify(options);
     const queryString = optionsQueryString.length ? `?${optionsQueryString}` : '';
     const endpoint = `/${subdomain}/jobs${queryString}`;
     return client.get({ endpoint });
-  },
+  }
   async listAll(options = {}) {
-    const { client } = this;
     Object.assign(options, { limit: 100 });
     const { jobs: firstJobs, paging: firstPaging } = await this.list(options);
     let result = firstJobs;
     let nextUrl = firstPaging && firstPaging.next;
     while (nextUrl) {
-      const { jobs, paging } = await client.get({ url: nextUrl });
+      // eslint-disable-next-line no-await-in-loop
+      const { jobs, paging } = await this.client.get({ url: nextUrl });
       result = result.concat(jobs);
       nextUrl = paging && paging.next;
     }
     return { jobs: result };
-  },
+  }
   questions() {
     const { client, subdomain, shortcode } = this;
-    return Questions.new({ client, subdomain, shortcode });
-  },
+    return new Questions({ client, subdomain, shortcode });
+  }
   members() {
     const { client, subdomain, shortcode } = this;
-    return Members.new({ client, subdomain, shortcode });
-  },
+    return new Members({ client, subdomain, shortcode });
+  }
   recruiters() {
     const { client, subdomain, shortcode } = this;
-    return Recruiters.new({ client, subdomain, shortcode });
-  },
+    return new Recruiters({ client, subdomain, shortcode });
+  }
   candidates(id) {
     const { client, subdomain, shortcode } = this;
-    return Candidates.new({ client, subdomain, shortcode, id });
-  },
+    return new Candidates({ client, subdomain, shortcode, id });
+  }
   applicationForm() {
     const { client, subdomain, shortcode } = this;
-    return ApplicationForm.new({ client, subdomain, shortcode });
-  },
-};
+    return new ApplicationForm({ client, subdomain, shortcode });
+  }
+}
 
-export default Jobs;
+module.exports = Jobs;

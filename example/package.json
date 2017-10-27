@@ -1,17 +1,21 @@
 {
   "name": "workable-client-example",
   "private": true,
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "npm run compile && node .",
-    "compile": "babel --presets es2015 -d dist src"
+    "eslint": "eslint src;exit 0",
+    "prettier": "prettier --write \"*.js\"",
+    "start": "node ."
   },
   "dependencies": {
-    "@efounders/workable-client": "file:.."
+    "@efounders/workable-client": "file:..",
+    "dotenv": "^4.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.18.2",
-    "babel-preset-es2015": "^6.18.0"
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-import": "^2.8.0",
+    "prettier": "^1.7.4"
   }
 }

@@ -1,15 +1,14 @@
-class Members {
+class ApplicationForm {
   constructor({ client, subdomain, shortcode }) {
     this.client = client;
     this.subdomain = subdomain;
     this.shortcode = shortcode;
   }
-  list() {
+  info() {
     const { client, subdomain, shortcode } = this;
-    const job = shortcode ? `/jobs/${shortcode}` : '';
-    const endpoint = `/${subdomain}${job}/members`;
+    const endpoint = `/${subdomain}/jobs/${shortcode}/application_form`;
     return client.get({ endpoint });
   }
 }
 
-module.exports = Members;
+module.exports = ApplicationForm;
